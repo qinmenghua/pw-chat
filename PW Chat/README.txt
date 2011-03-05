@@ -1,8 +1,8 @@
 For source code download-------------------------------------------------------
 The solution of PW-Chat contains pre and post build events that probably link
-to applications you don't have on your system, GNU tools (rm cp mv) 7zip and NSIS
-You must either remove them from the build events OR make sure you have all
-the tools (I like a nice automated build)
+to applications you don't have on your system, GNU tools (rm, cp, mv; windows
+equivs don't like me) 7zip and NSIS. You must either remove them from the build
+events OR make sure you have all the tools (I like a nice automated build)
 
 For compiled download(applies to source as well)-------------------------------
 You DO NOT have to use the Setup provided, I simply have it there for ease of 
