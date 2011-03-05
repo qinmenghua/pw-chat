@@ -15,14 +15,7 @@ http://dl.dropbox.com/u/1178264/screenshots/settings3.png
  * Open users.php settings here should be self explanatory (comments describe what is going on)
 http://dl.dropbox.com/u/1178264/screenshots/CUsersDavidDocumentsVisual%20Studio%202010ProjectsPW%20Chatpwchat-serverusers.php%20-%20Notepad%2B%2B.png
  * Save and close users.php
-=== Optional but recommended ===
- * Open PW Chat (from either install or standalone)
-http://dl.dropbox.com/u/1178264/screenshots/PW%20Chat.png
- * Edit > Application Settings
-http://dl.dropbox.com/u/1178264/screenshots/Application%20Settings%20%282%29.png
- * Click New Key then Export Key
-http://dl.dropbox.com/u/1178264/screenshots/Key%20Save%20Location.png
- * Replace key.key then click Save in application settings
+=== Logging In ===
  * File > Open > New Connection
 http://dl.dropbox.com/u/1178264/screenshots/New%20Connection.png
  * Fill in with the user that you made in users.php
@@ -31,4 +24,14 @@ http://dl.dropbox.com/u/1178264/screenshots/New%20Connection%20%282%29.png
  * You should now see something similar to this
 http://dl.dropbox.com/u/1178264/screenshots/PW%20Chat%20%282%29.png
 
-*If this does not work please raise an issue OR let me know on Ragezone thread*
+=== Optional but recommended ===
+ * Open PW Chat (from either install or standalone)
+http://dl.dropbox.com/u/1178264/screenshots/PW%20Chat.png
+ * Edit > Application Settings
+http://dl.dropbox.com/u/1178264/screenshots/Application%20Settings%20%282%29.png
+ * Click New Key then Export Key
+http://dl.dropbox.com/u/1178264/screenshots/Key%20Save%20Location.png
+ * Replace key.key then click Save in application settings
+
+
+*If any of this does not work please raise an issue OR let me know on Ragezone thread*
