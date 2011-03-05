@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PW_Chat.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="lusername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="lpassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="lhost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="opacity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="sound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="manPage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://dl.dropbox.com/u/1178264/pw-chat/manual.html</Value>
+    </Setting>
+    <Setting Name="aboutURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://dl.dropbox.com/u/1178264/pw-chat/about.html</Value>
+    </Setting>
+    <Setting Name="textcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">ControlText</Value>
+    </Setting>
+    <Setting Name="wincolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
+    <Setting Name="dtextcolor" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)">ControlText</Value>
+    </Setting>
+    <Setting Name="dwincolor" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
+    <Setting Name="defaultCryptKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">jJTg6z00UFmHMpGLyTgHAjdcrWfzrEPZ9fbKRpLOVP0=</Value>
+    </Setting>
+    <Setting Name="defaultIV" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">euo++R62pY940xlUPeMrAu+lPCL4/etfzf3RyQFUKos=</Value>
+    </Setting>
+    <Setting Name="cryptKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">jJTg6z00UFmHMpGLyTgHAjdcrWfzrEPZ9fbKRpLOVP0=</Value>
+    </Setting>
+    <Setting Name="cryptIV" Type="System.String" Scope="User">
+      <Value Profile="(Default)">euo++R62pY940xlUPeMrAu+lPCL4/etfzf3RyQFUKos=</Value>
+    </Setting>
+    <Setting Name="tray" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="speech" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="emptymsg" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

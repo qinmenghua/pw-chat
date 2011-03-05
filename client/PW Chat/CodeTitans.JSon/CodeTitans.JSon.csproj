@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D7442B5-7447-46EC-B2CD-55369F13E2B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeTitans.JSon</RootNamespace>
+    <AssemblyName>CodeTitans.JSon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IJSonObject.cs" />
+    <Compile Include="IJSonReader.cs" />
+    <Compile Include="IJSonSerializable.cs" />
+    <Compile Include="IJSonWriter.cs" />
+    <Compile Include="JSonException.cs" />
+    <Compile Include="JSonIgnoreAttribute.cs" />
+    <Compile Include="JSonMemberAttribute.cs" />
+    <Compile Include="JSonMemberMissingException.cs" />
+    <Compile Include="JSonReader.cs" />
+    <Compile Include="JSonReaderException.cs" />
+    <Compile Include="JSonReaderTokenInfo.cs" />
+    <Compile Include="JSonReaderTokenType.cs" />
+    <Compile Include="JSonSerializableAttribute.cs" />
+    <Compile Include="JSonWriter.cs" />
+    <Compile Include="JSonWriterException.cs" />
+    <Compile Include="JSonWriterTokenInfo.cs" />
+    <Compile Include="JSonWriterTokenType.cs" />
+    <Compile Include="NumericHelper.cs" />
+    <Compile Include="Objects\JSonArray.cs" />
+    <Compile Include="Objects\JSonBooleanObject.cs" />
+    <Compile Include="Objects\JSonDecimalObject.cs" />
+    <Compile Include="Objects\JSonDictionary.cs" />
+    <Compile Include="Objects\JSonObjectConverter.cs" />
+    <Compile Include="Objects\JSonStringObject.cs" />
+    <Compile Include="Properties\AssemblyCommonInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializationHelper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
