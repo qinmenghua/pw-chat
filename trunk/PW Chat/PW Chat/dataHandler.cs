@@ -60,7 +60,7 @@ namespace PW_Chat
             Console.WriteLine(jstring);
             Console.WriteLine(json);
 
-            IJSonObject sr = readJson(sendToServer(json, "login"));
+            IJSonObject sr = sendToServer(json, "login");
             if (sr["login"].BooleanValue)
             {
                 authkey = sr["aid"].StringValue;
@@ -91,7 +91,7 @@ namespace PW_Chat
         public bool SendMessage(String message)
         {
             String json = formJson("{\"msg\" : \"" + message + "\", \"username\" : \"" + username + "\", \"password\" : \"" + password + "\", \"salt\" : \"" + saltGen() + "\"}");
-            IJSonObject sr = readJson(sendToServer(json, "sendmsg"));
+            IJSonObject sr = sendToServer(json, "sendmsg");
             Console.WriteLine(json);
             bool r = sr["broadcast"].BooleanValue;
             Console.WriteLine("Send Message " + (r ? "Success" : "Fail"));
@@ -99,7 +99,7 @@ namespace PW_Chat
         }
         public void getChats(int cid = -1, int num = -100, int limit = -1)
         {
-            IJSonObject sr = readJson(sendToServer(formJson("{\"num\" : " + cid + ", \"limit\" : \""+ num +"\"}"), "getmsgs"));
+            IJSonObject sr = sendToServer(formJson("{\"num\" : " + cid + ", \"limit\" : \""+ num +"\"}"), "getmsgs");
             //do nothing if there aren't any chats in the first place
             if (sr != null)
             {
@@ -108,7 +108,7 @@ namespace PW_Chat
                 {
                     try
                     {
-                        Program.mform.mainTextBox.AppendText(String.Format("U:{0}, T:{1}, CD:{2}, D:{3}, MSG:{4}\n", sr[i]["uid"].Int32Value, sr[i]["type"].StringValue, sr[i]["chldst"].Int32Value, sr[i]["time"].StringValue, sr[i]["msg"].StringValue));
+                        Program.mform.mainTextBox.AppendText(String.Format("U:{0}, T:{1}, CD:{2}, D:{3}, MSG:{4}\r\n", sr[i]["uid"].Int32Value, sr[i]["type"].StringValue, sr[i]["chldst"].Int32Value, sr[i]["time"].StringValue, sr[i]["msg"].StringValue));
                         dataHandler.cid = sr[i]["cid"].Int32Value;
                     }
                     catch (InvalidOperationException)
@@ -122,7 +122,7 @@ namespace PW_Chat
                 }
             }
         }
-        public String sendToServer(String data, String servmethod, String aid = null)
+        public IJSonObject sendToServer(String data, String servmethod, String aid = null)
         {
             aid = aid ?? authkey;
             //don't forget the Uri.EscapseDataString...
@@ -130,6 +130,8 @@ namespace PW_Chat
             data = "json=" + Uri.EscapeDataString(data);
             String aiv = "aiv=" + Uri.EscapeDataString(Convert.ToBase64String(authiv));
             Console.WriteLine(data);
+            //this is what gets returned on any error
+            IJSonObject errjson = readJson(formJson("{\"connectfail\" : 1, \"login\" : 0, \"broadcast\" : 0, \"getmsgs\" : 0}"));
             if (!servername.ToLower().Contains("http://"))
             {
                 //add http:// in front of url if it doesn't have it
@@ -140,7 +142,7 @@ namespace PW_Chat
             String thisServ = String.Format("{0}?{1}&{2}&{3}&noerr", servername, servmethod, aid, aiv);
             Console.WriteLine(thisServ);
             try
-            {   
+            {
                 //cast needed because HttpWebRequest is an extension of WebRequest
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(thisServ);
                 req.UserAgent = "PW Chat v" + updateCheck.thisVersion;
@@ -154,17 +156,23 @@ namespace PW_Chat
                 HttpWebResponse rep = (HttpWebResponse)req.GetResponse();
                 StreamReader sr = new StreamReader(rep.GetResponseStream());
                 String r = sr.ReadToEnd();
-                Console.WriteLine(r);
                 sw.Close();
                 sr.Close();
-                return r;
+                Console.WriteLine(r);
+                IJSonObject ijr = readJson(r);
+                return ijr;
             }
             catch (WebException)
             {
                 //any errors caused by the network won't make a kersplode
                 Console.WriteLine("Unable to connect to server");
                 //yes I know this is weird, I might change this eventually (doubt it)
-                return formJson("{\"connectfail\" : 1, \"login\" : 0, \"broadcast\" : 0, \"getmsgs\" : 0}");
+                return errjson;
+            }
+            catch (JSonReaderException)
+            {
+                Console.WriteLine("Invalid JSON detected from server.");
+                return errjson;
             }
 
         }
