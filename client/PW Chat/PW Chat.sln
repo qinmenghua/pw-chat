@@ -7,6 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeTitans.JSon", "CodeTita
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pwChatTesting", "pwChatTesting\pwChatTesting.csproj", "{AB415978-3142-48F1-94A6-295E2F61FFD4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pwchat-server", "pwchat-server", "{4A2312BD-4CA9-4824-A3F3-A28933CEEE1E}"
+	ProjectSection(SolutionItems) = preProject
+		pwchat-server\csharp.php = pwchat-server\csharp.php
+		pwchat-server\len.len = pwchat-server\len.len
+		pwchat-server\LICENSE.txt = pwchat-server\LICENSE.txt
+		pwchat-server\marshalling.php = pwchat-server\marshalling.php
+		pwchat-server\users.php = pwchat-server\users.php
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
