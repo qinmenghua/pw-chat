@@ -208,13 +208,17 @@
 del "$(ProjectDir)bin\Release\CodeTitans.JSon.xml"
 del "$(ProjectDir)bin\Release\PW Chat.exe.config"
 "C:\Program Files (x86)\NSIS\makensis.exe" "$(ProjectDir)\installerScript.nsi"
+mkdir "$(ProjectDir)\bin\Release\standalone"
+mv "$(ProjectDir)\bin\Release\CodeTitans.JSon.dll" "$(ProjectDir)\bin\Release\standalone"
+mv "$(ProjectDir)\bin\Release\PW Chat.exe" "$(ProjectDir)\bin\Release\standalone"
+"C:\Program Files\7-zip\7z.exe" a -r -tzip -y PW-Chat.zip "$(ProjectDir)\bin\Release\*" "$(SolutionDir)\pwchat-server\" "$(SolutionDir)\README.txt" -xr!*svn*
 
 :exit
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>cd "$(TargetDir)"
-del /Q *.*
+rm -rf *
 </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
