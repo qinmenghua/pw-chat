@@ -215,7 +215,7 @@ namespace PW_Chat
             }
             if (!uc.IsUpToDate && dr == DialogResult.OK)
             {
-                Help.ShowHelp(Form.ActiveForm, "http://dl.dropbox.com/u/1178264/pw-chat/release_nosrc.zip");
+                Help.ShowHelp(Form.ActiveForm, "http://code.google.com/p/pw-chat/downloads/list");
             }
         }
 
