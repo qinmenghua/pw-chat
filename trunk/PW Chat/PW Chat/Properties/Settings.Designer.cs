@@ -85,7 +85,7 @@ namespace PW_Chat.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://dl.dropbox.com/u/1178264/pw-chat/manual.html")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://code.google.com/p/pw-chat/wiki/Manual")]
         public string manPage {
             get {
                 return ((string)(this["manPage"]));

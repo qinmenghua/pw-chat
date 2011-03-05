@@ -14,7 +14,7 @@ namespace PW_Chat
 
         private void helpbtn_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(Form.ActiveForm, Properties.Settings.Default.manPage+"#newcon");
+            Help.ShowHelp(Form.ActiveForm, Properties.Settings.Default.manPage + "#Logging_In");
         }
 
         private void cancelbtn_Click(object sender, EventArgs e)
