@@ -21,9 +21,49 @@ namespace PW_Chat
         public static long now;
         private static bool hidden = false;
         private static bool speech = Properties.Settings.Default.speech;
+        public String conInfo
+        {
+            get
+            {
+                return connectionInfoBar.Text;
+            }
+            set
+            {
+                connectionInfoBar.Text = value;
+            }
+        }
+        public Color backColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+            set
+            {
+                this.BackColor = value;
+                mainMenu.BackColor = value;
+                //msgSendBox.BackColor = value;
+                statusStrip.BackColor = value;
+                //mainTextBox.BackColor = value;
+            }
+        }
+        public Color foreColor
+        {
+            get
+            {
+                return this.ForeColor;
+            }
+            set
+            {
+                this.ForeColor = value;
+                mainMenu.ForeColor = value;
+                //msgSendBox.ForeColor = value;
+                statusStrip.ForeColor = value;
+                //mainTextBox.ForeColor = value;
+            }
+        }
         //intended to be the ONLY instance of dataHandler,
         //I purposely did not make it a static class
-        //as there may be times I don't want to use this instance
         public static dataHandler dh = new dataHandler();
         private SpeechSynthesizer s = new SpeechSynthesizer();
         public mainForm()
@@ -31,8 +71,8 @@ namespace PW_Chat
             InitializeComponent();
             this.Icon = Properties.Resources.icon;
             trayIcon.Visible = Properties.Settings.Default.tray;
-            setBackColor(Properties.Settings.Default.wincolor);
-            setFontColor(Properties.Settings.Default.textcolor);
+            backColor = Properties.Settings.Default.wincolor;
+            foreColor = Properties.Settings.Default.textcolor;
             if (!loggedIn)
             {
                 disableMsgFields();
@@ -64,12 +104,6 @@ namespace PW_Chat
         {
             aboutBox abb = new aboutBox();
             abb.Show();
-        }
-
-        public void setConInfo(String info)
-        {
-            connectionInfoBar.Text = info;
-            
         }
 
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -116,7 +150,7 @@ namespace PW_Chat
             {
                 DateTime now = DateTime.Now;
                 String nw = String.Format("{0: yyyy-mm-dd HH:mm:ss}", now);
-                //its not actually added to server logs... (might end up adding sql insert for this though)
+                //its not actually added to server logs... but is added to MySQL db
                 mainTextBox.AppendText(String.Format("U:{0}, T:{1}, CD:{2}, D:{3}, MSG:{4}\n", -1, "Chat", 9, nw, msgSendBox.Text));
                 msgSendBox.Text = "";
             }
@@ -137,7 +171,7 @@ namespace PW_Chat
         {
             disableMsgFields();
             dh.logout();
-            setConInfo("Not Connected");
+            conInfo = "Not Connected";
             mainTextBox.Text = "";
             chatChecker.Enabled = false;
             servername = null;
@@ -145,25 +179,6 @@ namespace PW_Chat
             password = null;
             closeConnectionToolStripMenuItem.Enabled = false;
             
-        }
-
-        public void setBackColor(Color winColor)
-        {
-            this.BackColor = winColor;
-            mainMenu.BackColor = winColor;
-            //Not sure if I want these to change...
-            /*msgSendBox.BackColor = winColor;
-            sendMsgBtn.BackColor = winColor;
-            msgArea.BackColor = winColor;*/
-        }
-        public void setFontColor(Color fontColor)
-        {
-            this.ForeColor = fontColor;
-            mainMenu.ForeColor = fontColor;
-            //Not sure if I want these to change...
-            /*msgSendBox.ForeColor = fontColor;
-            sendMsgBtn.ForeColor = fontColor;
-            msgArea.ForeColor = fontColor;*/
         }
 
         private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)

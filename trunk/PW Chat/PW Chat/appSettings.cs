@@ -18,6 +18,7 @@ namespace PW_Chat
             this.Icon = Properties.Resources.icon;
             opacityMeter.Value = Properties.Settings.Default.opacity;
             opacityMeterlbl.Text = Properties.Settings.Default.opacity + "%";
+            //I know you can't see the text...
             fontColorbtn.Text = fontColorGet();
             winColorbtn.Text = winColorGet();
             fontColorbtnSet(Properties.Settings.Default.textcolor);
@@ -91,8 +92,8 @@ namespace PW_Chat
             Properties.Settings.Default.tray = tray;
             Properties.Settings.Default.emptymsg = emptyMsgSend.Checked;
             Program.mform.trayIcon.Visible = tray;
-            Program.mform.setBackColor(Properties.Settings.Default.wincolor);
-            Program.mform.setFontColor(Properties.Settings.Default.textcolor);
+            Program.mform.backColor = Properties.Settings.Default.wincolor;
+            Program.mform.foreColor = Properties.Settings.Default.textcolor;
             Properties.Settings.Default.Save();
             this.Close();
         }

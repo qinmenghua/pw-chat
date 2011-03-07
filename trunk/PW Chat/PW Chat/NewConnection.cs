@@ -39,11 +39,11 @@ namespace PW_Chat
         public bool Login(String user, String pass, String serv)
         {
             mainForm.dh = new dataHandler(serv, user, pass);
-            Program.mform.setConInfo("Logging in...");
+            Program.mform.conInfo = "Logging in...";
             if (mainForm.dh.login())
             {
                 //Program.mform.Text = "PW Chat: " + mainForm.username + "@" + mainForm.server;
-                Program.mform.setConInfo("Logged in @ " + serv);
+                Program.mform.conInfo = "Logged in @ " + serv;
                 Program.mform.enableMsgFields();
                 Properties.Settings.Default.lhost = serv;
                 Properties.Settings.Default.lusername = user;
@@ -61,7 +61,7 @@ namespace PW_Chat
             else
             {
                 mainForm.dh = new dataHandler();
-                Program.mform.setConInfo("Error: Login Failed. Not Connected.");
+                Program.mform.conInfo = "Error: Login Failed. Not Connected.";
                 return false;
             }
         }
