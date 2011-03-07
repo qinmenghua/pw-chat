@@ -8,7 +8,7 @@ namespace PW_Chat
         //This was done so other classes can actually call functions in
         //mainForm since default (in MSVC# anyway) is to make form Anonymous... (which is stupid)
         public static mainForm mform;
-        [STAThread]
+        [STAThread] //can't use File Open/Save dialogs w/o this
         static void Main()
         {
             Application.EnableVisualStyles();
