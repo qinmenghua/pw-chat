@@ -38,6 +38,7 @@
             this.closeConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speechSynthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,12 +59,15 @@
             this.trayIconMenuQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.idleChecker = new System.Windows.Forms.Timer(this.components);
             this.mainTextBox = new System.Windows.Forms.TextBox();
-            this.chatChecker = new System.Windows.Forms.Timer(this.components);
             this.mainTextBoxMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBoxLineCount = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.clearTextBox = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chatChecker = new System.Windows.Forms.Timer(this.components);
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gMPermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.trayIconMenu.SuspendLayout();
@@ -75,6 +79,7 @@
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.usersToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.gCToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
@@ -154,6 +159,16 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+                        | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.ToolTipText = "Copies ALL lines below to clipboard.";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // connectionSettingsToolStripMenuItem
             // 
@@ -321,11 +336,6 @@
             this.mainTextBox.Size = new System.Drawing.Size(559, 272);
             this.mainTextBox.TabIndex = 5;
             // 
-            // chatChecker
-            // 
-            this.chatChecker.Interval = 5000;
-            this.chatChecker.Tick += new System.EventHandler(this.chatChecker_Tick);
-            // 
             // mainTextBoxMenu
             // 
             this.mainTextBoxMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -354,15 +364,39 @@
             this.clearTextBox.Text = "Clear Text Box";
             this.clearTextBox.Click += new System.EventHandler(this.clearTextBox_Click);
             // 
-            // copyToolStripMenuItem
+            // chatChecker
             // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.ToolTipText = "Copies ALL lines below to clipboard.";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            this.chatChecker.Interval = 5000;
+            this.chatChecker.Tick += new System.EventHandler(this.chatChecker_Tick);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.muteToolStripMenuItem,
+            this.registerUserToolStripMenuItem,
+            this.gMPermissionsToolStripMenuItem});
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.usersToolStripMenuItem.Text = "Users";
+            this.usersToolStripMenuItem.Visible = false;
+            // 
+            // muteToolStripMenuItem
+            // 
+            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.muteToolStripMenuItem.Text = "Mute";
+            // 
+            // registerUserToolStripMenuItem
+            // 
+            this.registerUserToolStripMenuItem.Name = "registerUserToolStripMenuItem";
+            this.registerUserToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.registerUserToolStripMenuItem.Text = "Register User";
+            // 
+            // gMPermissionsToolStripMenuItem
+            // 
+            this.gMPermissionsToolStripMenuItem.Name = "gMPermissionsToolStripMenuItem";
+            this.gMPermissionsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.gMPermissionsToolStripMenuItem.Text = "GM Permissions";
             // 
             // mainForm
             // 
@@ -426,6 +460,10 @@
         private System.Windows.Forms.ToolStripMenuItem clearTextBox;
         public System.Windows.Forms.ToolStripMenuItem textBoxLineCount;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registerUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gMPermissionsToolStripMenuItem;
     }
 }
 
