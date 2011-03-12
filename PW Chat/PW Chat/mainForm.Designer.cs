@@ -66,8 +66,7 @@
             this.chatChecker = new System.Windows.Forms.Timer(this.components);
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registerUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gMPermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getRoleNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.trayIconMenu.SuspendLayout();
@@ -79,7 +78,6 @@
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.usersToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.gCToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
@@ -153,6 +151,7 @@
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem,
+            this.usersToolStripMenuItem,
             this.connectionSettingsToolStripMenuItem,
             this.applicationSettingsToolStripMenuItem,
             this.speechSynthToolStripMenuItem});
@@ -349,18 +348,18 @@
             // 
             this.textBoxLineCount.Enabled = false;
             this.textBoxLineCount.Name = "textBoxLineCount";
-            this.textBoxLineCount.Size = new System.Drawing.Size(152, 22);
+            this.textBoxLineCount.Size = new System.Drawing.Size(148, 22);
             this.textBoxLineCount.Text = "Lines: 0";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
             // 
             // clearTextBox
             // 
             this.clearTextBox.Name = "clearTextBox";
-            this.clearTextBox.Size = new System.Drawing.Size(152, 22);
+            this.clearTextBox.Size = new System.Drawing.Size(148, 22);
             this.clearTextBox.Text = "Clear Text Box";
             this.clearTextBox.Click += new System.EventHandler(this.clearTextBox_Click);
             // 
@@ -373,30 +372,25 @@
             // 
             this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.muteToolStripMenuItem,
-            this.registerUserToolStripMenuItem,
-            this.gMPermissionsToolStripMenuItem});
+            this.getRoleNameToolStripMenuItem});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Visible = false;
             // 
             // muteToolStripMenuItem
             // 
             this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
-            this.muteToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.muteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.muteToolStripMenuItem.Text = "Mute";
             // 
-            // registerUserToolStripMenuItem
+            // getRoleNameToolStripMenuItem
             // 
-            this.registerUserToolStripMenuItem.Name = "registerUserToolStripMenuItem";
-            this.registerUserToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.registerUserToolStripMenuItem.Text = "Register User";
-            // 
-            // gMPermissionsToolStripMenuItem
-            // 
-            this.gMPermissionsToolStripMenuItem.Name = "gMPermissionsToolStripMenuItem";
-            this.gMPermissionsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.gMPermissionsToolStripMenuItem.Text = "GM Permissions";
+            this.getRoleNameToolStripMenuItem.Name = "getRoleNameToolStripMenuItem";
+            this.getRoleNameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.getRoleNameToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.getRoleNameToolStripMenuItem.Text = "Get Role Name";
             // 
             // mainForm
             // 
@@ -440,7 +434,6 @@
         private System.Windows.Forms.ToolStripStatusLabel connectionInfoBar;
         private System.Windows.Forms.ToolStripMenuItem clearSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationSettingsToolStripMenuItem;
-        private System.Windows.Forms.TextBox msgSendBox;
         private System.Windows.Forms.Button sendMsgBtn;
         public System.Windows.Forms.NotifyIcon trayIcon;
         private System.Windows.Forms.ContextMenuStrip trayIconMenu;
@@ -462,8 +455,8 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registerUserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gMPermissionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getRoleNameToolStripMenuItem;
+        internal System.Windows.Forms.TextBox msgSendBox;
     }
 }
 

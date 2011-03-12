@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Security.Cryptography;
 using PW_Chat;
 
 namespace pwChatTesting
@@ -61,12 +63,32 @@ namespace pwChatTesting
                 jss, jhw, rjhw, ijhw, irjhw, ujhw, urjhw);
             Console.WriteLine(writeline);
             sw.WriteLine(writeline);
-            String hjc = "\nHello JSon test complete\n";
+            String hjc = "\nHello JSon test complete, running non-ascii encrypt decrypt:\n";
             Console.WriteLine(hjc);
             sw.WriteLine(hjc);
-            sw.Close();
+            String nae = dh.EncryptIt("▲▲▲♂♂♂");
+            String nad = dh.DecryptIt(nae);
+            String nacm = String.Format("Encrypted: {0}\nDecrypted : {1}\n", nae, nad);
+            Console.WriteLine(nacm);
+            sw.WriteLine(nacm);
+            String nac = "\nNon-ASCII encrypt decrypt complete, running non-ascii Json test:\n";
+            Console.WriteLine(nac);
+            sw.WriteLine(nac);
+            String naje = dh.formJson("{\"test\" : \"▲▲▲♂♂♂\"}");
+            String najd = dh.readJson(naje)["test"].StringValue;
+            String najm = String.Format("Encrypted: {0}\nDecrypted: {1}\n", naje, najd);
+            String najc = "\nNon-ASCII Json test complete\n";
+            Console.WriteLine(najm);
+            Console.WriteLine(najc);
+            sw.WriteLine(najm);
+            sw.WriteLine(najc);
+            SHA512Managed sha = new SHA512Managed();
+            String hash = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("▲▲▲♂♂♂")));
+            sw.WriteLine(hash);
+            Console.WriteLine(hash);
             Console.WriteLine("Press any key to exit.");
-
+            Console.ReadKey();
+            sw.Close();
             
         }
     }
