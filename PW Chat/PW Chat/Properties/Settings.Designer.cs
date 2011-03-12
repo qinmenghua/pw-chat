@@ -220,5 +220,17 @@ namespace PW_Chat.Properties {
                 this["emptymsg"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long lucheck {
+            get {
+                return ((long)(this["lucheck"]));
+            }
+            set {
+                this["lucheck"] = value;
+            }
+        }
     }
 }
