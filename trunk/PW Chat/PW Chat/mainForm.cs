@@ -85,7 +85,7 @@ namespace PW_Chat
                 gCToolStripMenuItem.Visible = true;
             #endif
         }
-        private long getNow()
+        public static long getNow()
         {
             return (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
         }
@@ -214,24 +214,7 @@ namespace PW_Chat
 
         private void updateCheckToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            updateCheck uc = new updateCheck();
-            String version = Convert.ToString(uc.webVersion);
-            String thisVersion = Convert.ToString(updateCheck.thisVersion);
-            String upToDate = uc.IsUpToDate ? "You are up to date." : "You should update.\nPress OK To update";
-            MessageBoxButtons dialogButtons = uc.IsUpToDate ? MessageBoxButtons.OK : MessageBoxButtons.OKCancel;
-            DialogResult dr;
-            if (uc.webVersion != -1)
-            {
-                dr = MessageBox.Show(String.Format("Current Version: {0}\nWeb Version: {1}\n{2}", thisVersion, version, upToDate), "Update Check", dialogButtons, MessageBoxIcon.Information);
-            }
-            else
-            {
-                dr = MessageBox.Show("Unable to get current version", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (!uc.IsUpToDate && dr == DialogResult.OK)
-            {
-                Help.ShowHelp(Form.ActiveForm, "http://code.google.com/p/pw-chat/downloads/list");
-            }
+            Program.updateChecker(false);
         }
 
         private void connectionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
