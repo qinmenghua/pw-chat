@@ -5,7 +5,7 @@ namespace PW_Chat
 {
     class updateCheck
     {
-        public static int thisVersion = 4;
+        public static int thisVersion = 5;
         public int webVersion;
         public bool IsUpToDate;
         public updateCheck()
@@ -19,7 +19,7 @@ namespace PW_Chat
             {
                 WebClient wc = new WebClient();
                 wc.Headers.Add("user-agent", "PW Chat v"+thisVersion);
-                int wdata = Convert.ToInt32(wc.DownloadString("http://dl.dropbox.com/u/1178264/pw-chat/version"));
+                int wdata = Convert.ToInt32(wc.DownloadString("http://pw-chat.googlecode.com/svn/trunk/PW%20Chat/version"));
                 return wdata;
             }
             catch (WebException)
