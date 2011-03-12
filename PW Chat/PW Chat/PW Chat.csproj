@@ -193,8 +193,8 @@
     <None Include="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons\icon.png" />
-    <Content Include="icons\s_icon.png" />
+    <None Include="icons\icon.png" />
+    <None Include="icons\s_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
