@@ -43,8 +43,10 @@ define("SQLUSER", "root");
 define("SQLPASS", "pass");
 define("SQLHOST", "localhost");
 define("SQLDB", "pw_chat");
-define("DELIVERYDH", "localhost");
+define("DELIVERYDH", "192.168.1.10");
 define("DELIVERYDP", 29100);
+define("GAMEDBDH", "192.168.1.10");
+define("GAMEDBDP", 29400);
 
 ///////////////////////////////////////////////////////////////////////////////
 //request functions section
@@ -73,8 +75,6 @@ if($_GET['initdb'] == AUTHKEY){
 	}
 }
 //Client requests begin (they all use post)
-//no idea why login/logout/sendmsg perform so slow on linux test box...
-//works fine on windows one..
 if(isset($_GET['login'])){
 	$d = readjson($_POST['json']);
 	$t = login($d['username'], $d['password']);
@@ -101,6 +101,8 @@ if(decrypt($_GET['auth'], $k[0], $_GET['aiv']) == AUTHKEY){
 	$encryption = (bool)substr($_POST['json'], 1, 1);
 	if(isset($_GET['sendmsg'])){
 		$d = readjson($_POST['json']);
+		//var_dump($d);
+		//var_dump($_POST);
 		//broadcast($_GET['msg']);
 		$c = false;
 		if($d){
@@ -109,7 +111,10 @@ if(decrypt($_GET['auth'], $k[0], $_GET['aiv']) == AUTHKEY){
 				if(broadcast($d['msg'])){
 					echo formjson('{"broadcast" : 1, "salt" : "'.saltgen().'"}');
 					$q = "values (-1, 'Chat', '9', '".baseb64_encode($d['msg'])."')";
-					mysqli_query(mysqli_connect(SQLHOST, SQLUSER, SQLPASS, SQLDB), "insert into  `messages` (`uid`, `type`, `chldst`, `message`) $q;");
+					$db = mysqli_connect(SQLHOST, SQLUSER, SQLPASS, SQLDB);
+					if($db){
+						mysqli_query($db, "insert into  `messages` (`uid`, `type`, `chldst`, `message`) $q;");
+					}
 					$c = true;
 				}
 			}
@@ -292,7 +297,7 @@ function logparse($logloc = null, $start = 0){
 						'chldst' => substr($o[8], 4),
 						//probably not the best way to do it...
 						//but hey it works... (for English anyway, might break other langs)
-						'msg' => base64_encode(str_replace("\000", "", base64_decode(substr($o[9], 4)))));
+						'msg' => base64_encode(iconv("UCS-2LE", "UTF-8", base64_decode(substr($o[9], 4)))));
 	}
 	return array('filelen' => count($file), 'data' => $out);
 }
@@ -379,54 +384,6 @@ function login($username, $password){
 	}
 	return array(0 => false, 1 => false);
 }
-//credits to gouranga for hexdump and broadcast functions
-function hexdump($data, $htmloutput = true, $uppercase = false, $return = false){
-		$hexi   = '';
-		$ascii  = '';
-		$dump   = ($htmloutput === true) ? '<pre>' : '';
-		$offset = 0;
-		$len    = strlen($data);
-		$x = ($uppercase === false) ? 'x' : 'X';
-		for ($i = $j = 0; $i < $len; $i++){
-				$hexi .= sprintf("%02$x ", ord($data[$i]));     // Convert to hexidecimal
-				if (ord($data[$i]) >= 32)                       // Replace non-viewable bytes with '.'
-						$ascii .= ($htmloutput === true) ? htmlentities($data[$i]) : $data[$i];
-				else
-						$ascii .= '.';
-				if (++$j === 16 || $i === $len - 1){
-						$dump .= sprintf("%04$x  %-49s  %s", $offset, $hexi, $ascii); // Join the hexi / ascii output
-						$hexi = $ascii = '';
-						$offset += 16;
-						$j = 0;
-						if ($i !== $len - 1)
-								$dump .= "\n";
-				}
-		}
-		$dump .= $htmloutput === true ? '</pre>' : '';
-		$dump .= "\n";
-		if ($return === false) {
-			echo $dump;
-		} else {
-			return $dump;
-		}
-}
-function broadcast($message){
-	$sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-	if($sock){
-		if(socket_connect($sock, DELIVERYDH, DELIVERYDP)){
-			$debug = true;
-			socket_set_block($sock);
-			$data2 = mByte(9) . mByte(0) . mInt(-1) . mInt(0) . mString($message);
-			$data = mUInt32(79) . mUInt32(strlen($data2)) . $data2;
-			socket_send($sock, $data, 8192, 0);
-			socket_set_nonblock($sock);
-			socket_close($sock);
-			return true;
-		} else {
-			return false;
-		}
-	}
-}
 //$from is id to start from, default is 100 from last
 //$limit is how many to give from $from if -1 it reads to end
 function getchats($cid = -1, $from = -100, $limit = -1){
@@ -468,6 +425,80 @@ function getchats($cid = -1, $from = -100, $limit = -1){
 	}
 	return false;
 }
+//credits to gouranga for hexdump and broadcast functions
+function hexdump($data, $htmloutput = true, $uppercase = false, $return = false){
+		$hexi   = '';
+		$ascii  = '';
+		$dump   = ($htmloutput === true) ? '<pre>' : '';
+		$offset = 0;
+		$len    = strlen($data);
+		$x = ($uppercase === false) ? 'x' : 'X';
+		for ($i = $j = 0; $i < $len; $i++){
+				$hexi .= sprintf("%02$x ", ord($data[$i]));     // Convert to hexidecimal
+				if (ord($data[$i]) >= 32)                       // Replace non-viewable bytes with '.'
+						$ascii .= ($htmloutput === true) ? htmlentities($data[$i]) : $data[$i];
+				else
+						$ascii .= '.';
+				if (++$j === 16 || $i === $len - 1){
+						$dump .= sprintf("%04$x  %-49s  %s", $offset, $hexi, $ascii); // Join the hexi / ascii output
+						$hexi = $ascii = '';
+						$offset += 16;
+						$j = 0;
+						if ($i !== $len - 1)
+								$dump .= "\n";
+				}
+		}
+		$dump .= $htmloutput === true ? '</pre>' : '';
+		$dump .= "\n";
+		if ($return === false) {
+			echo $dump;
+		} else {
+			return $dump;
+		}
+}
+function broadcast($message){
+	$sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+	if($sock){
+		if(socket_connect($sock, DELIVERYDH, DELIVERYDP)){
+			socket_set_block($sock);
+			$data2 = mByte(9) . mByte(0) . mInt(-1) . mInt(0) . mString($message);
+			$data = mUInt32(79) . mUInt32(strlen($data2)) . $data2;
+			socket_send($sock, $data, 8192, 0);
+			socket_set_nonblock($sock);
+			socket_close($sock);
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+//I'll eventually make this prettier but for now it works
+function getrolename($id){
+	$sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+	if($sock){
+		if(socket_connect($sock, GAMEDBDH, GAMEDBDP)){
+			socket_set_block($sock);
+			$data = mUInt32(3032) . mByte(8) . mShort(32768) . mShort(0x0025) . mInt($id);
+			//hexdump($data);
+			socket_send($sock, $data, 8192, 0);
+			socket_recv($sock, $buf, 8192, 0);
+			//hexdump($buf);
+			socket_set_nonblock($sock);
+			socket_close($sock);;
+			return iconv("UCS-2LE", "UTF-8", substr($buf, 17));
+		}
+	}
+}
+//echo getrolename(32);
 //var_dump(readjson(getchats(204978)));
-//echo var_dump(readjson(getchats(100000)));
-//echo var_dump(broadcast("Test"));
+//var_dump(readjson(getchats(100000)));
+//var_dump(broadcast("Broadcast System Message"));
+// $tt = formjson('{"test" : "▲▲▲♂♂♂"}');
+// var_dump($tt);
+// $t = readjson($tt);
+// var_dump(broadcast($t['test']));
+// var_dump(base64_encode("▲"));
+// $k = readkeyfile();
+ // var_dump(decrypt("Oy5SJuhzF/kDmQrwfZnqhSufge2o1AA6UdZNtWga4I0=", $key[0], "9oXbBR/7DX+M+jSwTYvCJblpmLvy4htMK5SELvgTpQY="));
+ //var_dump(base64_encode(hash("sha512", iconv("UTF-8", "UCS-2LE", "▲▲▲♂♂♂"), true)));
+ //var_dump(base64_encode(hash("sha512", "▲▲▲♂♂♂", true)));

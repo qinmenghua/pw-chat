@@ -13,8 +13,8 @@ namespace PW_Chat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Check to see if the user has made keys yet, if not set them
-            if (Properties.Settings.Default.cryptKey == "")
+            //Ensure that user settable keys exist
+            if (Properties.Settings.Default.cryptKey.Length == 0 || Properties.Settings.Default.cryptIV.Length == 0)
             {
                 Properties.Settings.Default.cryptKey = Properties.Settings.Default.defaultCryptKey;
                 Properties.Settings.Default.cryptIV = Properties.Settings.Default.defaultIV;

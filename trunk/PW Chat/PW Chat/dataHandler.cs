@@ -90,6 +90,10 @@ namespace PW_Chat
         }
         public bool SendMessage(String message)
         {
+            Console.Write("Message param received: ");
+            Console.WriteLine(message);
+            Console.Write("Message in mainForm: ");
+            Console.WriteLine(Program.mform.msgSendBox.Text);
             String json = formJson("{\"msg\" : \"" + message + "\", \"username\" : \"" + username + "\", \"password\" : \"" + password + "\", \"salt\" : \"" + saltGen() + "\"}");
             IJSonObject sr = sendToServer(json, "sendmsg");
             Console.WriteLine(json);
@@ -124,6 +128,7 @@ namespace PW_Chat
         }
         public IJSonObject sendToServer(String data, String servmethod, String aid = null)
         {
+            Console.WriteLine(data);
             aid = aid ?? authkey;
             //don't forget the Uri.EscapseDataString...
             aid = "auth=" + Uri.EscapeDataString(aid);
@@ -148,6 +153,8 @@ namespace PW_Chat
                 req.UserAgent = "PW Chat v" + updateCheck.thisVersion;
                 req.Method = "POST";
                 req.ContentType = "application/x-www-form-urlencoded";
+                //base64 is required to be ASCII and the rest of JSON chars are ASCII
+                //so using Encoding.ASCII is fine
                 byte[] bdata = Encoding.ASCII.GetBytes(data);
                 req.ContentLength = bdata.Length;
                 Stream sw = req.GetRequestStream();
@@ -250,10 +257,13 @@ namespace PW_Chat
         //by default for security a new IV is used each message
         public String formJson(String data, bool iv = true)
         {
+            Console.Write("Data param received: ");
+            Console.WriteLine(data);
             JSonWriter jw = new JSonWriter();
             Object payload;
-            SHA512Managed checksum = new System.Security.Cryptography.SHA512Managed();
-            String sha512 = System.Convert.ToBase64String(checksum.ComputeHash(Encoding.ASCII.GetBytes(data)));
+            SHA512Managed checksum = new SHA512Managed();
+            //And RIGHT HERE is where I messed up for message sending
+            String sha512 = System.Convert.ToBase64String(checksum.ComputeHash(Encoding.UTF8.GetBytes(data)));
             if (encryption)
             {
                 String e;
