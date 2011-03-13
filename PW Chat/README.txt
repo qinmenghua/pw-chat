@@ -33,6 +33,6 @@ is perfect.
 
 Found a bug and made a fix?----------------------------------------------------
 Great post it on the RaGEZONE thread or on the Google Code 'Request Code Review'
-https://code.google.com/p/pw-chat/issues/entry?show=review&former=sourcelist
+https://code.google.com/p/pw-chat/issues/entry?template=Code%20Review
 If your bugfix or modification ends up in one of my releases you'll even get
 added to a special contributors page! Sounds nice doesn't it?
