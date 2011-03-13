@@ -27,6 +27,7 @@ define("AUTHKEY", "JI1hEq8MKTLdXZLdfjtJOIl6vj42UFmtdeAIuzl5");
 define("ENCRYPTION", true);
 
 define("LOGLOC", "/PWServer/logservice/logs/world2.chat");
+//define("LOGLOC", "world2.chat");
 
 define("SQLTABLE", "CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -123,12 +124,18 @@ if(decrypt($_GET['auth'], $k[0], $_GET['aiv']) == AUTHKEY){
 			echo formjson('{"broadcast" : 0, "salt" : "'.saltgen().'"}');
 		}
 	}
-	
 	if(isset($_GET['getmsgs'])){
 		$d = readjson($_POST['json']);
 		if($d){
 			//client keeps track of id's
 			echo formjson(getchats($d["num"], $d["limit"]));
+		}
+	}
+	if(isset($_GET['getrolename'])){
+		$d = readjson($_POST['json']);
+		if($d){
+			$name = getrolename($d['uid']);
+			echo formjson('{"rolename" : "'. $name .'", "salt" : "'.saltgen().'"}');
 		}
 	}
 }
@@ -472,22 +479,44 @@ function broadcast($message){
 		}
 	}
 }
-//I'll eventually make this prettier but for now it works
 function getrolename($id){
+	//figure out how far off role ID is from account ID
+	$offset = $id % 8;
 	$sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 	if($sock){
 		if(socket_connect($sock, GAMEDBDH, GAMEDBDP)){
 			socket_set_block($sock);
-			$data = mUInt32(3032) . mByte(8) . mShort(32768) . mShort(0x0025) . mInt($id);
+			$data = mUInt32(3032) . mByte(8) . mShort(32768) . mShort(0x0025) . mInt($id-$offset);
 			//hexdump($data);
 			socket_send($sock, $data, 8192, 0);
 			socket_recv($sock, $buf, 8192, 0);
 			//hexdump($buf);
 			socket_set_nonblock($sock);
-			socket_close($sock);;
-			return iconv("UCS-2LE", "UTF-8", substr($buf, 17));
+			socket_close($sock);
+			//for some reason the number of names
+			//doesn't always stay in the same spot
+			$pos11 = ord(substr($buf, 11, 1));
+			$pos12 = ord(substr($buf, 12, 1));
+			if($pos11 == 0){
+				$namelen = $pos12;
+				$pholder = 17;
+			} else {
+				$namelen = $pos11;
+				$pholder = 16;
+			}
+			
+			for($i = 0; $i < $namelen; $i++){
+				$thisnamelen = ord(substr($buf, $pholder, 1));
+				$names[] = iconv("UCS-2LE", "UTF-8", substr($buf, $pholder+1, $thisnamelen));
+				//+1 is because it needs to advance one to get where the name starts
+				//+$thisnamelen pushes it all the way to end of name
+				//+4 then skips over the 'useless' bytes to get next name length
+				$pholder += 1 + $thisnamelen + 4;
+			}
+			return $names[$offset];
 		}
 	}
+	return "Unable to retrieve";
 }
 //echo getrolename(32);
 //var_dump(readjson(getchats(204978)));
