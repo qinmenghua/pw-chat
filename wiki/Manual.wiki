@@ -7,7 +7,7 @@
  * Open up the pwchat-server directory and then open csharp.php (this can be renamed later)
  * Change any of these settings if you want (I HIGHLY recommend you change the authkey)
 http://dl.dropbox.com/u/1178264/screenshots/settings1.png
- * Scroll down a little bit and edit the SQL settings to match your server. You may use the dbo database that pwAdmin and the PWServer uses if you wish. 
+ * Scroll down a little bit and edit the SQL settings and gamedbd/gdeliveryd to match your server. You may use the dbo database that pwAdmin and the PWServer uses if you wish. 
 http://dl.dropbox.com/u/1178264/screenshots/settings2.png
  * If you get a syntax error it means you need to update your PHP version ([http://bugs.php.net/bug.php?id=53632 PHP Bug #53632])
 http://dl.dropbox.com/u/1178264/screenshots/settings3.png
