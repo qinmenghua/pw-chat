@@ -30,3 +30,9 @@ the download on the Google Code page as soon as I fix ANY bug to keep any that
 do exist to a minimum for the sake of the users and my own sanity. I attempt to
 write as much bug free code as I can, but as any developer can tell you, no one
 is perfect.
+
+Found a bug and made a fix?----------------------------------------------------
+Great post it on the RaGEZONE thread or on the Google Code 'Request Code Review'
+https://code.google.com/p/pw-chat/issues/entry?show=review&former=sourcelist
+If your bugfix or modification ends up in one of my releases you'll even get
+added to a special contributors page! Sounds nice doesn't it?
