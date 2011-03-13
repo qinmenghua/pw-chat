@@ -3,7 +3,7 @@
 = Installation =
 
  * Download PW Chat from [https://code.google.com/p/pw-chat/downloads/list here] or checkout the source from [https://code.google.com/p/pw-chat/source/checkout here]
- * Read the included README.txt file for some notes about PW Chat
+ * Read the included [http://pw-chat.googlecode.com/svn/trunk/PW%20Chat/README.txt README.txt] file for some notes about PW Chat
  * Open up the pwchat-server directory and then open csharp.php (this can be renamed later)
  * Change any of these settings if you want (I HIGHLY recommend you change the authkey)
 http://dl.dropbox.com/u/1178264/screenshots/settings1.png
