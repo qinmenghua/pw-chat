@@ -102,14 +102,12 @@ namespace PW_Chat
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            aboutBox abb = new aboutBox();
-            abb.Show();
+            new aboutBox().Show();
         }
 
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewConnection ncw = new NewConnection();
-            ncw.Show();
+            new NewConnection().Show();
         }
 
         private void clearConSettings()
@@ -127,8 +125,7 @@ namespace PW_Chat
 
         private void applicationSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            appSettings aps = new appSettings();
-            aps.Show();
+            new appSettings().Show();
         }
         public void playAlert()
         {
@@ -214,13 +211,12 @@ namespace PW_Chat
 
         private void updateCheckToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.updateChecker(false);
+            Program.updateChecker();
         }
 
         private void connectionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            connectionSettings cs = new connectionSettings();
-            cs.Show();
+            new connectionSettings().Show();
         }
 
         private void idleChecker_Tick(object sender, EventArgs e)
@@ -296,6 +292,16 @@ namespace PW_Chat
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(mainTextBox.Text);
+        }
+
+        private void getRoleNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new getRoleName().Show();
+        }
+
+        private void muteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming Soon!", "Not Implemented", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
      
     }

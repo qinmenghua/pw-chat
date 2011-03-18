@@ -37,7 +37,7 @@ namespace PW_Chat
             mform = new mainForm();
             Application.Run(mform);
         }
-        internal static bool updateChecker(bool onlyShowIfUpdateAvail)
+        internal static bool updateChecker(bool onlyShowIfUpdateAvail = false)
         {
             updateCheck uc = new updateCheck();
             String version = Convert.ToString(uc.webVersion);
@@ -50,7 +50,7 @@ namespace PW_Chat
             {
                 if (uc.IsUpToDate && onlyShowIfUpdateAvail)
                 {
-                    dr = DialogResult.OK;
+                    return true;
                 }
                 else
                 {

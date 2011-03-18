@@ -265,7 +265,7 @@ function readjson($data){
 
 //WARNING!!!! This may be fast(only takes 2 seconds on my laptop to parse 100,000 lines)
 //but uses insane amounts of RAM, make sure max memory in php.ini is set
-//to at least 512mb (a 100,000 line log can use this much if not more)
+//to at least 512mb (100,000 lines uses ~300 mb)
 //I'll try to work on memory usage a bit but until then memory usage will be
 //very high for initial log parse
 //starts at $start
@@ -274,7 +274,6 @@ function logparse($logloc = null, $start = 0){
 	//using ?: only works in php 5.3+ 
 	$logloc = $logloc ?: LOGLOC; //use $logloc = $logloc ? $logloc : LOGLOC on lower versions
 	$file = file($logloc);
-	$ofile = null;
 	$i = 0;
 	foreach($file as $f){
 		if($i >= $start){
@@ -292,19 +291,19 @@ function logparse($logloc = null, $start = 0){
 		$ofile[7] = src=id
 		$ofile[8] = chl=id OR (if whisper) dst=
 		$ofile[9] = msg=
-		
 		*/
 	}
-	$out = null;
+	$i = 0;
 	foreach($ofile as $o){
 	//clean up the array a bit
 		$out[] = array('date' => $o[0]." ".$o[1],
 						'type' => str_replace(":", "", $o[6]),
 						'uid' => substr($o[7], 4),
 						'chldst' => substr($o[8], 4),
-						//probably not the best way to do it...
-						//but hey it works... (for English anyway, might break other langs)
 						'msg' => base64_encode(iconv("UCS-2LE", "UTF-8", base64_decode(substr($o[9], 4)))));
+		//delete array entry after it moves it into the cleaned up array
+		//it does seem to save a small amount of memory but hey... it something
+		unset($ofile[$i]);
 	}
 	return array('filelen' => count($file), 'data' => $out);
 }
@@ -513,7 +512,9 @@ function getrolename($id){
 				//+4 then skips over the 'useless' bytes to get next name length
 				$pholder += 1 + $thisnamelen + 4;
 			}
-			return $names[$offset];
+			if($names[$offset] != ""){
+				return $names[$offset];
+			}
 		}
 	}
 	return "Unable to retrieve";
