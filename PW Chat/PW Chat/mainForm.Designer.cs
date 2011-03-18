@@ -39,6 +39,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getRoleNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speechSynthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,9 +67,6 @@
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.clearTextBox = new System.Windows.Forms.ToolStripMenuItem();
             this.chatChecker = new System.Windows.Forms.Timer(this.components);
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getRoleNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.trayIconMenu.SuspendLayout();
@@ -168,6 +168,31 @@
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.ToolTipText = "Copies ALL lines below to clipboard.";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.muteToolStripMenuItem,
+            this.getRoleNameToolStripMenuItem});
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.usersToolStripMenuItem.Text = "Users";
+            // 
+            // muteToolStripMenuItem
+            // 
+            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
+            this.muteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.muteToolStripMenuItem.Text = "Mute";
+            this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
+            // 
+            // getRoleNameToolStripMenuItem
+            // 
+            this.getRoleNameToolStripMenuItem.Name = "getRoleNameToolStripMenuItem";
+            this.getRoleNameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.getRoleNameToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.getRoleNameToolStripMenuItem.Text = "Get Role Name";
+            this.getRoleNameToolStripMenuItem.Click += new System.EventHandler(this.getRoleNameToolStripMenuItem_Click);
             // 
             // connectionSettingsToolStripMenuItem
             // 
@@ -367,30 +392,6 @@
             // 
             this.chatChecker.Interval = 5000;
             this.chatChecker.Tick += new System.EventHandler(this.chatChecker_Tick);
-            // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.muteToolStripMenuItem,
-            this.getRoleNameToolStripMenuItem});
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.usersToolStripMenuItem.Text = "Users";
-            this.usersToolStripMenuItem.Visible = false;
-            // 
-            // muteToolStripMenuItem
-            // 
-            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
-            this.muteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.muteToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.muteToolStripMenuItem.Text = "Mute";
-            // 
-            // getRoleNameToolStripMenuItem
-            // 
-            this.getRoleNameToolStripMenuItem.Name = "getRoleNameToolStripMenuItem";
-            this.getRoleNameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.getRoleNameToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.getRoleNameToolStripMenuItem.Text = "Get Role Name";
             // 
             // mainForm
             // 

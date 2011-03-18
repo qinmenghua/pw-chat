@@ -5,7 +5,7 @@ namespace PW_Chat
 {
     class updateCheck
     {
-        public static int thisVersion = 6;
+        public const int thisVersion = 7;
         public int webVersion;
         public bool IsUpToDate;
         public updateCheck()

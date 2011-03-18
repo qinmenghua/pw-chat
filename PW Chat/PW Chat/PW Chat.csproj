@@ -110,6 +110,12 @@
       <DependentUpon>connectionSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="dataHandler.cs" />
+    <Compile Include="getRoleName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="getRoleName.Designer.cs">
+      <DependentUpon>getRoleName.cs</DependentUpon>
+    </Compile>
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="connectionSettings.resx">
       <DependentUpon>connectionSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="getRoleName.resx">
+      <DependentUpon>getRoleName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>

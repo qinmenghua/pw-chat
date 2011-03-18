@@ -103,7 +103,7 @@ namespace PW_Chat
         }
         public void getChats(int cid = -1, int num = -100, int limit = -1)
         {
-            IJSonObject sr = sendToServer(formJson("{\"num\" : " + cid + ", \"limit\" : \""+ num +"\"}"), "getmsgs");
+            IJSonObject sr = sendToServer(formJson("{\"num\" : " + cid + ", \"limit\" : \"" + num + "\", \"salt\" : \"" + saltGen() + "\"}"), "getmsgs");
             //do nothing if there aren't any chats in the first place
             if (sr != null)
             {
@@ -126,6 +126,15 @@ namespace PW_Chat
                 }
             }
         }
+        public String getRoleName(int id)
+        {
+            IJSonObject sr = sendToServer(formJson("{\"uid\" : \"" + id + "\", \"salt\" : \"" + saltGen() + "\"}"), "getrolename");
+            if (sr != null)
+            {
+                return sr["rolename"].StringValue;
+            }
+            return "Unable to retrieve";
+        }
         public IJSonObject sendToServer(String data, String servmethod, String aid = null)
         {
             Console.WriteLine(data);
@@ -136,7 +145,7 @@ namespace PW_Chat
             String aiv = "aiv=" + Uri.EscapeDataString(Convert.ToBase64String(authiv));
             Console.WriteLine(data);
             //this is what gets returned on any error
-            IJSonObject errjson = readJson(formJson("{\"connectfail\" : 1, \"login\" : 0, \"broadcast\" : 0, \"getmsgs\" : 0}"));
+            IJSonObject errjson = readJson(formJson("{\"connectfail\" : 1, \"login\" : 0, \"broadcast\" : 0, \"getmsgs\" : 0, \"rolename\" : 0}"));
             if (!servername.ToLower().Contains("http://"))
             {
                 //add http:// in front of url if it doesn't have it
@@ -174,6 +183,11 @@ namespace PW_Chat
                 //any errors caused by the network won't make a kersplode
                 Console.WriteLine("Unable to connect to server");
                 //yes I know this is weird, I might change this eventually (doubt it)
+                return errjson;
+            }
+            catch (UriFormatException)
+            {
+                Console.WriteLine("Invalid server Uri");
                 return errjson;
             }
             catch (JSonReaderException)
