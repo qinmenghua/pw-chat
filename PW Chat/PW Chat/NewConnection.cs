@@ -38,7 +38,7 @@ namespace PW_Chat
         }
         public bool Login(String user, String pass, String serv)
         {
-            mainForm.dh = new dataHandler(serv, user, pass);
+            mainForm.dh = new dataHandler(user, pass, serv);
             Program.mform.conInfo = "Logging in...";
             if (mainForm.dh.login())
             {

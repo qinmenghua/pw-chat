@@ -103,6 +103,7 @@
     <Compile Include="appSettings.Designer.cs">
       <DependentUpon>appSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ASyncDataHandler.cs" />
     <Compile Include="connectionSettings.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -304,6 +304,7 @@ function logparse($logloc = null, $start = 0){
 		//delete array entry after it moves it into the cleaned up array
 		//it does seem to save a small amount of memory but hey... it something
 		unset($ofile[$i]);
+		$i++;
 	}
 	return array('filelen' => count($file), 'data' => $out);
 }
