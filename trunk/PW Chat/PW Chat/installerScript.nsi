@@ -28,7 +28,7 @@ SetCompressor LZMA
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
-Section "${APPNAME}" Section1
+Section "${APPNAME}" Install
 
 	; Set Section properties
 	SetOverwrite on
@@ -76,5 +76,3 @@ Section Uninstall
 	RMDir "$INSTDIR\"
 
 SectionEnd
-
-; eof

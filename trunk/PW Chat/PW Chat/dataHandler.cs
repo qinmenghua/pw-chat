@@ -25,17 +25,12 @@ namespace PW_Chat
         {
             //dummy constructor used for encryption only initialization
         }
-        public dataHandler(String s, String u, String p)
+        public dataHandler(String u, String p, String s)
         {
             //constructor used for encryption and data sending
             servername = s;
             username = u;
             password = p;
-        }
-        public dataHandler(String s)
-        {
-            //sending data no auth constructor, never used, possible future use
-            servername = s;
         }
         //create a salt to send with messages
         //helps protect encryption key
