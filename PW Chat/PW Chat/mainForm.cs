@@ -105,7 +105,9 @@ namespace PW_Chat
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new aboutBox().Show();
+            //new aboutBox().Show();
+            Help.ShowHelp(Form.ActiveForm, "https://code.google.com/p/pw-chat/");
+
         }
 
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
