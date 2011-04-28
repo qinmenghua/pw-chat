@@ -283,6 +283,7 @@
             this.msgSendBox.Name = "msgSendBox";
             this.msgSendBox.Size = new System.Drawing.Size(478, 20);
             this.msgSendBox.TabIndex = 2;
+            this.msgSendBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.msgSendBox_KeyUp);
             // 
             // sendMsgBtn
             // 
