@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Media;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace PW_Chat
 {
@@ -21,6 +22,8 @@ namespace PW_Chat
         public static long now;
         private static bool hidden = false;
         private static bool speech = Properties.Settings.Default.speech;
+        private List<String> msgSendHist = new List<String>();
+        private int msgSendHistLoc = 0;
         public String conInfo
         {
             get
@@ -149,6 +152,9 @@ namespace PW_Chat
                 String nw = String.Format("{0: yyyy-mm-dd HH:mm:ss}", now);
                 //its not actually added to server logs... but is added to MySQL db
                 mainTextBox.AppendText(String.Format("U:{0}, T:{1}, CD:{2}, D:{3}, MSG:{4}\n", -1, "Chat", 9, nw, msgSendBox.Text));
+                msgSendHist.Add(msgSendBox.Text);
+                //move the pointer to the end so that it shows correctly
+                msgSendHistLoc = msgSendHist.Count;
                 msgSendBox.Text = "";
             }
         }
@@ -302,6 +308,15 @@ namespace PW_Chat
         private void muteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Coming Soon!", "Not Implemented", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void msgSendBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Up)
+            {
+                msgSendBox.Text = msgSendHist[msgSendHistLoc];
+                msgSendHistLoc--;
+            }
         }
      
     }
