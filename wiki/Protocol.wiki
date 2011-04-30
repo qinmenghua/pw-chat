@@ -30,6 +30,6 @@ iv does not need to be sent as the key generated and given by the client
 contains an IV to be used but it can be specified, the PSK is still used
 the PSK can not be transmitted in the message ever
 
-By default the server and client use PKCS7 padding for the encryption, but
+By default the server and client use [http://tools.ietf.org/html/rfc5652#section-6.3 PKCS7] padding for the encryption, but
 you may use any padding mode you desire as long as the server and client 
 are configured to know about it.
