@@ -14,12 +14,12 @@ data is either a JSON object, in which case the array would look like
 `[encryption, sha512checksum, base64object]`
 base64object is the object (for example: 
 `{"action" : "value", "key" : "value", "key" : "value" }`)
-in base64 EVEN IF the data is not encrypted, if encrytped
+in base64 EVEN IF the data is not encrypted, if encrypted
 the object is still the same but encrypted
 
 A login object is
-`{"action" : "login", "username" : "usernameString", "password" : passwordString"} `
-which is transfered as a standard data message (as specified above)
+`{"action" : "login", "username" : "usernameString", "password" : "passwordString"} `
+which is transferred as a standard data message (as specified above)
 The passwordString is ALWAYS plaintext, the client should use encryption
 but is not required (and can be disabled any time during communication)
 
@@ -28,7 +28,7 @@ A logout object is only
 
 iv does not need to be sent as the key generated and given by the client
 contains an IV to be used but it can be specified, the PSK is still used
-the PSK can not be tranmitted in the message ever
+the PSK can not be transmitted in the message ever
 
 By default the server and client use PKCS7 padding for the encryption, but
 you may use any padding mode you desire as long as the server and client 
