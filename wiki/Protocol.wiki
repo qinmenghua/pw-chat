@@ -3,7 +3,7 @@
 PW Chat network data transfer specification
 
 The server expects a JSON array formatted like so
-[encryption, sha512checksum, data, iv = null]
+`[encryption, sha512checksum, data, iv = null]`
 Encryption is either 1 or 0 that representing if the data is encrypted with
 the shared secret AES (Rinjdael) key
 
@@ -11,7 +11,7 @@ sha512checksum is for data integrity check, it is of the UNENCRYPTED data
 not of the ENCRYPTED data represented in base64 of the hash NOT in hex
 
 data is either a JSON object, in which case the array would look like
-[encryption, sha512checksum, base64object]
+`[encryption, sha512checksum, base64object]`
 base64object is the object (for example: 
 `{"action" : "value", "key" : "value", "key" : "value" }`)
 in base64 EVEN IF the data is not encrypted, if encrytped
