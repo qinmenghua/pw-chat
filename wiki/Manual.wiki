@@ -10,7 +10,7 @@ https://pw-chat.googlecode.com/svn/wiki-images/settings1.png
  * Scroll down a little bit and edit the SQL settings and gamedbd/gdeliveryd to match your server. You may use the dbo database that pwAdmin and the PWServer uses if you wish. 
  * After getting everything all setup don't forget to run ?initdb=YOURAUTHKEY to automatically setup the database
 https://pw-chat.googlecode.com/svn/wiki-images/settings2.png
- * If you get a syntax error it means you need to update your PHP version ([https://bugs.php.net/bug.php?id=53632 PHP Bug #53632])
+ * If you get a syntax error it means you need to update your PHP version ([http://bugs.php.net/bug.php?id=53632 PHP Bug #53632])
 https://pw-chat.googlecode.com/svn/wiki-images/settings3.png
  * Save and close csharp.php (you may rename this to anything you want, but remember its name)
  * Open users.php settings here should be self explanatory (comments describe what is going on)
