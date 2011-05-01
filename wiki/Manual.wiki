@@ -19,7 +19,7 @@ https://pw-chat.googlecode.com/svn/wiki-images/CUsersDavidDocumentsVisual%20Stud
 === Logging In ===
  * File > Open > New Connection
 https://pw-chat.googlecode.com/svn/wiki-images/New%20Connection.png
- * Fill in with the user that you made in users.php and wherever the server is For example localhost/pwchat-server/csharp.php or mypwserver.com/pwchat/ if you renamed csharp.php to index.php (https:// is not required to be put in, client will automatically add if it isn't there)
+ * Fill in with the user that you made in users.php and wherever the server is For example localhost/pwchat-server/csharp.php or mypwserver.com/pwchat/ if you renamed csharp.php to index.php (http:// is not required to be put in, client will automatically add if it isn't there)
 https://pw-chat.googlecode.com/svn/wiki-images/New%20Connection%20%282%29.png
  * Click Login
  * You should now see something similar to this
